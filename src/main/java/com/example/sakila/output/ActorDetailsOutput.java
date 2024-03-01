@@ -1,14 +1,12 @@
 package com.example.sakila.output;
 
 import com.example.sakila.entities.Actor;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-@AllArgsConstructor
 public class ActorDetailsOutput {
     private Short id;
     private String firstName;
