@@ -27,7 +27,7 @@ public class Film {
     private Year releaseYear;
 
     @ManyToOne
-    @JoinColumn(name="language_id")
+    @JoinColumn(name = "language_id")
     private Language language;
 
     @Column(name = "length")
@@ -42,8 +42,8 @@ public class Film {
     @ManyToMany
     @JoinTable(
             name = "film_actor",
-            joinColumns = { @JoinColumn(name = "film_id") },
-            inverseJoinColumns = { @JoinColumn(name = "actor_id") }
+            joinColumns = {@JoinColumn(name = "film_id")},
+            inverseJoinColumns = {@JoinColumn(name = "actor_id")}
     )
     private List<Actor> cast = new ArrayList<>();
 }

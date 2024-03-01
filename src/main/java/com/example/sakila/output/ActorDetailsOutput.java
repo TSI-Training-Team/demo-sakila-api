@@ -14,7 +14,7 @@ public class ActorDetailsOutput {
     private String fullName;
     private List<FilmReferenceOutput> films;
 
-    public ActorDetailsOutput (Actor actor) {
+    public ActorDetailsOutput(Actor actor) {
         this.id = actor.getId();
         this.firstName = actor.getFirstName();
         this.lastName = actor.getLastName();

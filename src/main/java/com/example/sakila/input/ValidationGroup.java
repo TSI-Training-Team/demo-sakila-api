@@ -7,7 +7,9 @@ public class ValidationGroup {
     public static final Class<? extends Default> create = Create.class;
     public static final Class<? extends Default> update = Create.class;
 
-    public interface Create extends Default {}
+    public interface Create extends Default {
+    }
 
-    public interface Update extends Default {}
+    public interface Update extends Default {
+    }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name ="actor")
+@Table(name = "actor")
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +28,8 @@ public class Actor {
     @ManyToMany
     @JoinTable(
             name = "film_actor",
-            joinColumns = { @JoinColumn(name = "actor_id") },
-            inverseJoinColumns = { @JoinColumn(name = "film_id") }
+            joinColumns = {@JoinColumn(name = "actor_id")},
+            inverseJoinColumns = {@JoinColumn(name = "film_id")}
     )
     private List<Film> films = new ArrayList<>();
 
