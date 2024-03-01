@@ -1,9 +1,11 @@
 package com.example.sakila.entities;
 
-import com.example.sakila.converters.YearConverter;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
+import java.time.Year;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,12 +24,26 @@ public class Film {
     private String description;
 
     @Column(name = "release_year")
-    @Convert(converter = YearConverter.class)
-    private Integer releaseYear;
+    private Year releaseYear;
+
+    @ManyToOne
+    @JoinColumn(name="language_id")
+    private Language language;
 
     @Column(name = "length")
     private Short length;
 
-    @ManyToMany(mappedBy = "films")
-    private List<Actor> cast;
+    @Column(name = "rental_duration")
+    private Byte rentalDuration;
+
+    @Column(name = "rental_rate")
+    private BigDecimal rentalRate;
+
+    @ManyToMany
+    @JoinTable(
+            name = "film_actor",
+            joinColumns = { @JoinColumn(name = "film_id") },
+            inverseJoinColumns = { @JoinColumn(name = "actor_id") }
+    )
+    private List<Actor> cast = new ArrayList<>();
 }
