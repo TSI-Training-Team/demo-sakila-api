@@ -11,7 +11,6 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -31,7 +30,6 @@ public class ActorControllerStepDefs {
     private ActorService mockService;
 
     private ActorInput selectedInput;
-    private Pageable pageable;
     private String queryName;
     private Integer queryPage;
     private Integer querySize;
@@ -42,7 +40,6 @@ public class ActorControllerStepDefs {
     private Exception caughtException;
 
     private List<Actor> expectedActors;
-    private Page<Actor> expectedPage;
 
     private final Short expectedId = 42;
     private final String expectedFirstName = "JO";
@@ -138,10 +135,10 @@ public class ActorControllerStepDefs {
 
     @When("a GET request is made to \\/actors")
     public void whenGetRequestToCollection() {
-        final var pageSize = Optional.ofNullable(querySize).orElse(50);
+        final int pageSize = Optional.ofNullable(querySize).orElse(50);
         final var pageNumber = Optional.ofNullable(queryPage).map(p -> p - 1).orElse(0);
-        pageable = Pageable.ofSize(pageSize).withPage(pageNumber);
-        expectedPage = new PageImpl<>(
+        final var pageable = Pageable.ofSize(pageSize).withPage(pageNumber);
+        final var expectedPage = new PageImpl<>(
                 expectedActors.subList(0, Math.min(pageSize, expectedActors.size())),
                 pageable, expectedActors.size());
         doReturn(expectedPage).when(mockService).listActors(any());
