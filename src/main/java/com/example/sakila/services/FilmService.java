@@ -55,7 +55,8 @@ public class FilmService {
                                     NOT_FOUND,
                                     String.format("No such actor with id '%d'.", actorId))))
                     .collect(Collectors.toList());
-            film.setCast(cast);
+            film.getCast().clear();
+            film.getCast().addAll(cast);
         }
     }
 
