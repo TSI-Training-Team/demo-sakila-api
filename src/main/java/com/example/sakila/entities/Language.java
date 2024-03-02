@@ -1,11 +1,15 @@
 package com.example.sakila.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
-@Data
+
 @Entity
 @Table(name = "language")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
