@@ -5,6 +5,7 @@ import com.example.sakila.output.ActorDetailsOutput;
 import com.example.sakila.output.ActorReferenceOutput;
 import com.example.sakila.output.PagedOutput;
 import com.example.sakila.services.ActorService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,11 @@ import static com.example.sakila.input.ValidationGroup.Update;
 
 @RestController
 @RequestMapping("/actors")
+@RequiredArgsConstructor
 public class ActorController {
 
     @Autowired
-    private ActorService actorService;
+    private final ActorService actorService;
 
     @PostMapping
     public ResponseEntity<ActorDetailsOutput> createActor(@Validated(Create.class) @RequestBody ActorInput data) {
@@ -40,7 +42,6 @@ public class ActorController {
             @RequestParam(required = false) Optional<Integer> page,
             @RequestParam(required = false) Optional<Integer> size
     ) {
-
         final var pageable = Pageable
                 .ofSize(size.orElse(50))
                 .withPage(page.map(p -> p - 1).orElse(0));
