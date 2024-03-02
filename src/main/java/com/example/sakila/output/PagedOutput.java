@@ -1,30 +1,32 @@
 package com.example.sakila.output;
 
-import lombok.Data;
+import lombok.Getter;
 import org.springframework.data.domain.Page;
 
-@Data
+import java.util.List;
+
+@Getter
 public class PagedOutput<T> {
 
-    @Data
-    private static class PageInfo {
-        private Integer number;
-        private Integer size;
-        private Integer itemCount;
-        private Long totalItemCount;
-        private Integer pageCount;
+    @Getter
+    public static class PageInfo {
+        private final Integer number;
+        private final Integer size;
+        private final Long itemCount;
+        private final Long totalItemCount;
+        private final Integer pageCount;
 
         public PageInfo(Page<?> page) {
-            this.number = page.getNumber();
+            this.number = page.getNumber() + 1;
             this.size = page.getSize();
-            this.itemCount = page.getNumberOfElements();
+            this.itemCount = (long)page.getNumberOfElements();
             this.totalItemCount = page.getTotalElements();
             this.pageCount = page.getTotalPages();
         }
     }
 
-    private Iterable<T> items;
-    private PageInfo page;
+    private final List<T> items;
+    private final PageInfo page;
 
     public PagedOutput(Page<T> page) {
         this.items = page.toList();
