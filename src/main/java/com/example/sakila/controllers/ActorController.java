@@ -36,6 +36,7 @@ public class ActorController {
                 .body(actorDetails);
     }
 
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     @GetMapping
     public PagedOutput<ActorReferenceOutput> listActors(
             @RequestParam(required = false) Optional<String> name,

@@ -31,6 +31,7 @@ public class FilmController {
                 .body(filmDetails);
     }
 
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     @GetMapping
     public PagedOutput<FilmReferenceOutput> listFilms(
             @RequestParam(required = false) Optional<String> title,
