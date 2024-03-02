@@ -13,8 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Year;
-import java.util.stream.Collectors;
-
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
@@ -54,7 +52,7 @@ public class FilmService {
                             .orElseThrow(() -> new ResponseStatusException(
                                     NOT_FOUND,
                                     String.format("No such actor with id '%d'.", actorId))))
-                    .collect(Collectors.toList());
+                    .toList();
             film.getCast().clear();
             film.getCast().addAll(cast);
         }
