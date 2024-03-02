@@ -1,15 +1,18 @@
 package com.example.sakila.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.Formula;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 @Table(name = "actor")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +20,11 @@ public class Actor {
     private Short id;
 
     @Column(name = "first_name")
+    @Setter
     private String firstName;
 
     @Column(name = "last_name")
+    @Setter
     private String lastName;
 
     @Formula("concat(first_name, ' ', last_name)")
@@ -31,6 +36,7 @@ public class Actor {
             joinColumns = {@JoinColumn(name = "actor_id")},
             inverseJoinColumns = {@JoinColumn(name = "film_id")}
     )
+    @ToString.Exclude
     private List<Film> films = new ArrayList<>();
 
     public String getFullName() {

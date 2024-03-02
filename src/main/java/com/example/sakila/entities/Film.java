@@ -1,20 +1,25 @@
 package com.example.sakila.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 @Table(name = "film")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "film_id")
+    @Setter(AccessLevel.NONE)
     private Short id;
 
     @Column(name = "title")
@@ -45,5 +50,7 @@ public class Film {
             joinColumns = {@JoinColumn(name = "film_id")},
             inverseJoinColumns = {@JoinColumn(name = "actor_id")}
     )
+    @ToString.Exclude
+    @Setter(AccessLevel.NONE)
     private List<Actor> cast = new ArrayList<>();
 }
